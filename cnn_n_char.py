@@ -9,7 +9,7 @@ import datasets.base as input_data
 MAX_STEPS = 10000
 BATCH_SIZE = 50
 # TEST_BATCH_SIZE = 2000
-TEST_BATCH_SIZE = 50
+TEST_BATCH_SIZE = 20
 
 LOG_DIR = 'log/cnn1-run-%s' % datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
@@ -159,7 +159,7 @@ def main(_):
         test_writer.close()
 
         # final check after looping
-        test_x, test_y = test_data.next_batch(2000)
+        test_x, test_y = test_data.next_batch(TEST_BATCH_SIZE)
         test_accuracy = accuracy.eval(feed_dict={x: test_x, y_: test_y, keep_prob: 1.0})
         print('testing accuracy = %.2f%%' % (test_accuracy * 100, ))
 
@@ -168,5 +168,11 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--data_dir', type=str, default='images/char-1-epoch-2000/',
                         help='Directory for storing input data')
+    parser.add_argument('--test_batch_size', type=int, default='2000',
+                        help='Test Batch Size')
+    parser.add_argument('--batch_size', type=int, default='50',
+                        help='Batch Size')
     FLAGS, unparsed = parser.parse_known_args()
+    BATCH_SIZE = FLAGS.batch_size
+    TEST_BATCH_SIZE = FLAGS.test_batch_size
     tf.app.run(main=main, argv=[sys.argv[0]] + unparsed)
