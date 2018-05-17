@@ -8,6 +8,7 @@ import datasets.base as input_data
 
 MAX_STEPS = 10000
 BATCH_SIZE = 50
+# TEST_BATCH_SIZE = 2000
 TEST_BATCH_SIZE = 50
 
 LOG_DIR = 'log/cnn1-run-%s' % datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
