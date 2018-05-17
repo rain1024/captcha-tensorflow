@@ -8,6 +8,7 @@ import datasets.base as input_data
 
 MAX_STEPS = 10000
 BATCH_SIZE = 50
+TEST_BATCH_SIZE = 50
 
 LOG_DIR = 'log/cnn1-run-%s' % datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
@@ -147,7 +148,7 @@ def main(_):
                 train_writer.add_summary(valid_summary, i)
 
                 # final check after looping
-                test_x, test_y = test_data.next_batch(2000)
+                test_x, test_y = test_data.next_batch(TEST_BATCH_SIZE)
                 test_summary, test_accuracy = sess.run([merged, accuracy], feed_dict={x: test_x, y_: test_y, keep_prob: 1.0})
                 test_writer.add_summary(test_summary, i)
 
