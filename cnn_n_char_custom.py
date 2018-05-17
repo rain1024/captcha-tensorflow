@@ -11,6 +11,7 @@ BATCH_SIZE = 50
 # TEST_BATCH_SIZE = 2000
 TEST_BATCH_SIZE = 20
 
+timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 LOG_DIR = 'log/cnn1-run-%s' % datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 
 FLAGS = None
@@ -109,6 +110,7 @@ def main(_):
 
     with tf.name_scope('reshape'):
         y_expect_reshaped = tf.reshape(y_, [-1, NUM_PER_IMAGE, LABEL_SIZE])
+        y_expect_reshaped = tf.reshape(y_, [-1, NUM_PER_IMAGE, LABEL_SIZE])
         y_got_reshaped = tf.reshape(y_conv, [-1, NUM_PER_IMAGE, LABEL_SIZE])
 
     # Define loss and optimizer
@@ -131,6 +133,8 @@ def main(_):
         correct_prediction = tf.equal(predict, expect)
         accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
         variable_summaries(accuracy)
+
+    saver = tf.train.Saver()
 
     with tf.Session() as sess:
 
@@ -158,7 +162,7 @@ def main(_):
                 test_writer.add_summary(test_summary, i)
 
                 print('step %s, training accuracy = %.2f%%, testing accuracy = %.2f%%' % (i, train_accuracy * 100, test_accuracy * 100))
-
+        saver.save(sess, 'model_%s.ckpt'.format(timestamp))
         train_writer.close()
         test_writer.close()
 
