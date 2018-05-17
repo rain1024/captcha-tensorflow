@@ -76,20 +76,24 @@ def main(_):
         b_conv1 = bias_variable([32])
 
         h_conv1 = tf.nn.relu(conv2d(x_image, W_conv1) + b_conv1)
+        print(h_conv1.shape)
         h_pool1 = max_pool_2x2(h_conv1)
+        print(h_pool1.shape)
 
     with tf.name_scope('convolution-layer-2'):
         W_conv2 = weight_variable([3, 3, 32, 64])
         b_conv2 = bias_variable([64])
 
         h_conv2 = tf.nn.relu(conv2d(h_pool1, W_conv2) + b_conv2)
+        print(h_conv2.shape)
         h_pool2 = max_pool_2x2(h_conv2)
+        print(h_pool2.shape)
 
     with tf.name_scope('densely-connected'):
-        W_fc1 = weight_variable([IMAGE_WIDTH * IMAGE_HEIGHT * 4, 1024])
+        W_fc1 = weight_variable([12 * 50 * 64, 1024])
         b_fc1 = bias_variable([1024])
 
-        h_pool2_flat = tf.reshape(h_pool2, [-1, IMAGE_WIDTH*IMAGE_HEIGHT*4])
+        h_pool2_flat = tf.reshape(h_pool2, [-1, 12 * 50 * 64])
         h_fc1 = tf.nn.relu(tf.matmul(h_pool2_flat, W_fc1) + b_fc1)
 
     with tf.name_scope('dropout'):
