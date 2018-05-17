@@ -6,7 +6,7 @@ import tensorflow as tf
 
 import datasets.base as input_data
 
-MAX_STEPS = 10000
+MAX_STEPS = 100
 BATCH_SIZE = 50
 # TEST_BATCH_SIZE = 2000
 TEST_BATCH_SIZE = 20
@@ -180,7 +180,10 @@ if __name__ == '__main__':
                         help='Test Batch Size')
     parser.add_argument('--batch_size', type=int, default='50',
                         help='Batch Size')
+    parser.add_argument('--max_steps', type=int, default='100',
+                        help='Max Steps')
     FLAGS, unparsed = parser.parse_known_args()
     BATCH_SIZE = FLAGS.batch_size
     TEST_BATCH_SIZE = FLAGS.test_batch_size
+    MAX_STEPS = FLAGS.max_steps
     tf.app.run(main=main, argv=[sys.argv[0]] + unparsed)
