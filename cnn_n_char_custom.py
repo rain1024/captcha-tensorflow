@@ -162,7 +162,7 @@ def main(_):
                 test_writer.add_summary(test_summary, i)
 
                 print('step %s, training accuracy = %.2f%%, testing accuracy = %.2f%%' % (i, train_accuracy * 100, test_accuracy * 100))
-        saver.save(sess, 'model_%s.ckpt'.format(timestamp))
+        saver.save(sess, 'model_%s.ckpt' % timestamp)
         train_writer.close()
         test_writer.close()
 
