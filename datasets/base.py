@@ -51,10 +51,13 @@ def _read_label(filename, label_choices, **extra_meta):
     data = []
 
     for c in labels:
-        idx = label_choices.index(c)
-        tmp = [0] * len(label_choices)
-        tmp[idx] = 1
-        data.extend(tmp)
+        try:
+            idx = label_choices.index(c)
+            tmp = [0] * len(label_choices)
+            tmp[idx] = 1
+            data.extend(tmp)
+        except:
+            pass
 
     return data
 

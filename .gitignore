@@ -48,3 +48,4 @@ pip-log.txt  # Installer logs
 !PLACEHOLDER
 
 datasets/images
+datasets/captcha-*
