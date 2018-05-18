@@ -62,6 +62,7 @@ def main(_):
     IMAGE_SIZE = IMAGE_WIDTH * IMAGE_HEIGHT
     print('label_size: %s, image_size: %s' % (LABEL_SIZE, IMAGE_SIZE))
 
+
     # variable in the graph for input data
     with tf.name_scope('input'):
         x = tf.placeholder(tf.float32, [None, IMAGE_HEIGHT, IMAGE_WIDTH])
@@ -162,7 +163,7 @@ def main(_):
                 test_writer.add_summary(test_summary, i)
 
                 print('step %s, training accuracy = %.2f%%, testing accuracy = %.2f%%' % (i, train_accuracy * 100, test_accuracy * 100))
-        saver.save(sess, './model_%s.ckpt' % timestamp)
+        saver.save(sess, './model/model_%s.ckpt' % timestamp)
         train_writer.close()
         test_writer.close()
 
