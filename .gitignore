@@ -50,3 +50,7 @@ pip-log.txt  # Installer logs
 datasets/images
 datasets/captcha-*
 !datasets/captcha-9359
+=======
+
+model/*
+!model/.gitkeep
